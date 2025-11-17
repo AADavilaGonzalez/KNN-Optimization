@@ -27,4 +27,11 @@
 
 4. Hacer una applicacion para presentar los datos obtenidos en cada ejecucion
    (basicamente presentar el CSV) y una seccion dedicada a la combinacion de
-   parameros con mayor desempeño (en cada una de las categorias o como promedio?)
+   parameros con mayor desempeño (en cada una de las categorias o como promedio?
+
+## Dependencias
+* python
+    - numpy
+    - scikit-learn
+
+
