@@ -71,6 +71,7 @@ cv_results = pd.DataFrame(random_search.cv_results_)
 
 df_export = pd.DataFrame()
 
+# Parámetros
 df_export['n_neighbors'] = cv_results['param_n_neighbors']
 df_export['weights'] = cv_results['param_weights']
 df_export['metric'] = cv_results['param_metric']
@@ -91,5 +92,4 @@ csv_filename = 'resultados_fase2_random.csv'
 df_export.to_csv(csv_filename, index=False)
 
 print(f"Archivo generado: {csv_filename}")
-print("Formato de columnas verificado: IDÉNTICO a Fase 1.")
 print(df_export.head(1)) 
