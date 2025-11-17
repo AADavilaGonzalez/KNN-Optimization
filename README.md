@@ -6,7 +6,7 @@
 * Roberto Sanchez Santoyo               ???????
 * Luis Fernando Segobia Torres          ???????
 * Aldo Adrian Davila Gonzales           1994122
-* Esmeralda Gabriela Mendieta Gonzalez  ???????
+* Esmeralda Gabriela Mendieta Gonzalez  2064574
 
 ## Porcedimiento
 
