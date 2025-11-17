@@ -8,20 +8,21 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from scipy.stats import randint
 
-print("--- Fase 2: Búsqueda Aleatoria (Salida Homologada) ---")
+print("--- Fase 2: Búsqueda Aleatoria ---")
 
+# 1. Carga y Split
 X, y = load_breast_cancer(return_X_y=True)
 X_train_raw, X_test_raw, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42, stratify=y
+    X, y, test_size=0.3, random_state=42, stratify=y #stratifícación para mantener proporciones
 )
-
+# 2. Escalado
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train_raw)
 X_test = scaler.transform(X_test_raw)
 
 
 param_distributions = {
-    'n_neighbors': randint(1, 51),           # Rango ampliado
+    'n_neighbors': randint(1, 51),           
     'weights': ['uniform', 'distance'],
     'metric': ['euclidean', 'manhattan', 'chebyshev'] 
 }
@@ -51,12 +52,12 @@ random_search = RandomizedSearchCV(
 
 print(f"Iniciando búsqueda aleatoria ({n_iter_search} iteraciones)...")
 
-# 5. Ejecución
+# 3. Ejecución
 start_total_time = time.time()
 random_search.fit(X_train, y_train)
 end_total_time = time.time()
 
-# 6. Evaluación del Ganador (Para mostrar en consola)
+# 4. Evaluación del Ganador (Para mostrar en consola)
 best_model = random_search.best_estimator_
 y_pred = best_model.predict(X_test)
 
@@ -74,16 +75,13 @@ df_export['n_neighbors'] = cv_results['param_n_neighbors']
 df_export['weights'] = cv_results['param_weights']
 df_export['metric'] = cv_results['param_metric']
 
-# B. Métricas
-# OJO: En Fase 1, 'Mean_CV_Recall' era CV y 'Accuracy_Test' era del Test Set.
-# En Fase 2, por eficiencia, usamos el promedio de CV para todo.
+# Métricas
 df_export['Mean_CV_Recall'] = cv_results['mean_test_recall']
 df_export['Accuracy_Test']  = cv_results['mean_test_accuracy'] 
 df_export['Precision_Test'] = cv_results['mean_test_precision']
 df_export['F1_Test']        = cv_results['mean_test_f1']
 
 #  Tiempos
-
 df_export['Train_Time_sec'] = cv_results['mean_fit_time']
 df_export['Pred_Time_sec']  = cv_results['mean_score_time']
 
