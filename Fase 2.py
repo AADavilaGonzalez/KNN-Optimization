@@ -20,7 +20,7 @@ X_test = scaler.transform(X_test_raw)
 
 
 param_distributions = {
-    'n_neighbors': randint(1, 51),
+    'n_neighbors': randint(1, 150),
     'weights': ['uniform', 'distance'],
     'metric': ['euclidean', 'manhattan', 'chebyshev']
 }
@@ -34,7 +34,7 @@ scoring_metrics = {
 }
 
 knn_base = KNeighborsClassifier()
-n_iter_search = 75  # Presupuesto limitado
+n_iter_search = 225  # Presupuesto limitado
 
 random_search = RandomizedSearchCV(
     estimator=knn_base,

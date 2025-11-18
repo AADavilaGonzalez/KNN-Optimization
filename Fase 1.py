@@ -23,7 +23,7 @@ X_test = scaler.transform(X_test_raw)
 X_full_scaled = scaler.fit_transform(X)
 
 # --- Definición del Espacio de Búsqueda ---
-k_values = range(1, 51)
+k_values = range(1, 150)
 weights_options = ['uniform', 'distance']  # uniform = votos iguales, distance = votos ponderados por distancia
 metric_options = ['euclidean', 'manhattan',
                   'chebyshev']  # euclidean = distancia directa, manhattan = distancia en bloques, chebyshev = max diferencia en cualquier dimensión
