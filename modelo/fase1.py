@@ -20,7 +20,7 @@ grid_search = GridSearchCV(
     param_grid=param_grid,
     cv=cv_config,
     scoring=scoring_metrics,
-    refit=cast(bool,'recall'),         # Se optimiza por Recall
+    refit='recall',         # Se optimiza por Recall
     n_jobs=-1,              # Activar uso de ejecucion en paralelo
     return_train_score=False
 )

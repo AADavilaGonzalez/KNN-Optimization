@@ -22,7 +22,7 @@ cv_config = StratifiedKFold(n_splits=50, shuffle=True, random_state=SEED)
 # Configuracion de parametros exportados a csv
 nombre_parametros_exportados= {
     "param_n_neighbors"     : "n_neighbors",
-    "param_weights"         : "weigths",
+    "param_weights"         : "weights",
     "param_metric"          : "metric",
     "mean_test_recall"      : "recall",
     "mean_test_accuracy"    : "accuracy",
