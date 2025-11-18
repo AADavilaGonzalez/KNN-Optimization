@@ -1,7 +1,7 @@
 import pandas as pd
 import time
 from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.model_selection import StratifiedKFold, train_test_split, RandomizedSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from scipy.stats import randint
@@ -36,11 +36,14 @@ scoring_metrics = {
 knn_base = KNeighborsClassifier()
 n_iter_search = 225  # Presupuesto limitado
 
+cv = 50
+skf = StratifiedKFold(n_splits=cv, shuffle=True, random_state=42)
+
 random_search = RandomizedSearchCV(
     estimator=knn_base,
     param_distributions=param_distributions,
     n_iter=n_iter_search,
-    cv=50,
+    cv=skf,
     scoring=scoring_metrics,
     refit='recall',     # El ganador se decide por Recall
     n_jobs=-1,
