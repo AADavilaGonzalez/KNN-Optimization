@@ -1,11 +1,9 @@
 import pandas as pd
-import numpy as np
 import time
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from scipy.stats import randint
 
 print("--- Fase 2: Búsqueda Aleatoria ---")
@@ -22,9 +20,9 @@ X_test = scaler.transform(X_test_raw)
 
 
 param_distributions = {
-    'n_neighbors': randint(1, 51),           
+    'n_neighbors': randint(1, 51),
     'weights': ['uniform', 'distance'],
-    'metric': ['euclidean', 'manhattan', 'chebyshev'] 
+    'metric': ['euclidean', 'manhattan', 'chebyshev']
 }
 
 
@@ -36,13 +34,13 @@ scoring_metrics = {
 }
 
 knn_base = KNeighborsClassifier()
-n_iter_search = 50  # Presupuesto limitado
+n_iter_search = 75  # Presupuesto limitado
 
 random_search = RandomizedSearchCV(
     estimator=knn_base,
     param_distributions=param_distributions,
     n_iter=n_iter_search,
-    cv=10,
+    cv=50,
     scoring=scoring_metrics,
     refit='recall',     # El ganador se decide por Recall
     n_jobs=-1,
@@ -78,7 +76,7 @@ df_export['metric'] = cv_results['param_metric']
 
 # Métricas
 df_export['Mean_CV_Recall'] = cv_results['mean_test_recall']
-df_export['Accuracy_Test']  = cv_results['mean_test_accuracy'] 
+df_export['Accuracy_Test']  = cv_results['mean_test_accuracy']
 df_export['Precision_Test'] = cv_results['mean_test_precision']
 df_export['F1_Test']        = cv_results['mean_test_f1']
 
@@ -92,4 +90,4 @@ csv_filename = 'resultados_fase2_random.csv'
 df_export.to_csv(csv_filename, index=False)
 
 print(f"Archivo generado: {csv_filename}")
-print(df_export.head(1)) 
+print(df_export.head(1))
